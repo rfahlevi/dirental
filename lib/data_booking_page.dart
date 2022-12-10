@@ -76,7 +76,7 @@ class _DataBookingPageState extends State<DataBookingPage> {
                   child: ListView.builder(
                     itemCount: _get.length,
                     itemBuilder: (context, index) {
-                      final idBooking = _get[index];
+                      final idBooking = _get[index]['id'];
                       return GestureDetector(
                         onTap: () {
                           showDialog(
@@ -121,7 +121,7 @@ class _DataBookingPageState extends State<DataBookingPage> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          _onDelete(idBooking.id.toString());
+                                          _onDelete(idBooking);
                                         },
                                         child: Text(
                                           "Ya",
