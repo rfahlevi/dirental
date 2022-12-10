@@ -36,7 +36,7 @@ class _BookingPageState extends State<BookingPage> {
   Future _getData() async {
     try {
       final response = await http
-          .post(Uri.parse("http://192.168.89.39/dirental/detail.php"), body: {
+          .post(Uri.parse("http://192.168.200.236/dirental/detail.php"), body: {
         "id": widget.id,
       });
 
@@ -60,17 +60,18 @@ class _BookingPageState extends State<BookingPage> {
     final total = harga * lamaSewa;
     final totalBiaya = double.tryParse(total.toString());
     try {
-      final response = await http
-          .post(Uri.parse("http://192.168.89.39/dirental/booking.php"), body: {
-        "nama": 'Reza Fahlevi',
-        "email": 'levicubs@gmail.com',
-        "merk": merk,
-        "transmisi": transmisi,
-        "harga_sewa": harga.toString(),
-        "lama_sewa": lamaSewa.toString(),
-        "total_biaya": totalBiaya.toString(),
-        "kode_booking": kodeBooking.toString(),
-      }).then((value) {
+      final response = await http.post(
+          Uri.parse("http://192.168.200.236/dirental/booking.php"),
+          body: {
+            "nama": 'Reza Fahlevi',
+            "email": 'levicubs@gmail.com',
+            "merk": merk,
+            "transmisi": transmisi,
+            "harga_sewa": harga.toString(),
+            "lama_sewa": lamaSewa.toString(),
+            "total_biaya": totalBiaya.toString(),
+            "kode_booking": kodeBooking.toString(),
+          }).then((value) {
         var data = jsonDecode(value.body);
         print(data['message']);
         Navigator.of(context).push(

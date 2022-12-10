@@ -33,7 +33,7 @@ class _EditPageState extends State<EditPage> {
   Future _getData() async {
     try {
       final response = await http
-          .post(Uri.parse("http://192.168.89.39/dirental/detail.php"), body: {
+          .post(Uri.parse("http://192.168.200.236/dirental/detail.php"), body: {
         "id": widget.id,
       });
 
@@ -67,21 +67,25 @@ class _EditPageState extends State<EditPage> {
   TextEditingController transmisiController = TextEditingController();
   TextEditingController hargaController = TextEditingController();
 
-// Insert data ke database
+// Update data ke database
   Future _onUpdate(context) async {
     try {
       await http
-          .post(Uri.parse("http://192.168.89.39/dirental/update.php"), body: {
-        "id": widget.id,
-        "image": File(image!.path),
+          .post(Uri.parse("http://192.168.200.236/dirental/update.php"), body: {
+        // "id": widget.id,
+        // "image": File(image!.path),
         "merk": merkController.text,
         "nopol": nopolController.text,
         "transmisi": transmisiController.text,
         "harga_sewa": hargaController.text,
       }).then((value) {
         var data = jsonDecode(value.body);
-        print(data['message']);
-        Get.to(() => const MainPage());
+        // print(data['message']);
+        // Fluttertoast.showToast(msg: 'Update Berhasil');
+        final alert = Fluttertoast.showToast(msg: 'Input berhasil');
+        setState(() {
+          Get.to(() => const MainPage());
+        });
       });
     } catch (e) {
       print(e);
@@ -91,7 +95,7 @@ class _EditPageState extends State<EditPage> {
   Future _onDelete() async {
     try {
       await http
-          .post(Uri.parse("http://192.168.89.39/dirental/delete.php"), body: {
+          .post(Uri.parse("http://192.168.200.236/dirental/delete.php"), body: {
         "id": widget.id,
       }).then((value) {
         var data = jsonDecode(value.body);
@@ -207,7 +211,7 @@ class _EditPageState extends State<EditPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Image.network(
-                                'http://192.168.89.39/dirental/images/${image!.path}'),
+                                'http://192.168.200.236/dirental/images/${image!.path}'),
                             // child: Image.file(File(image!.path).absolute),
                           )
                         : Container(

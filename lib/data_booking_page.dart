@@ -27,7 +27,7 @@ class _DataBookingPageState extends State<DataBookingPage> {
   Future _getData() async {
     try {
       final response = await http.get(
-        Uri.parse("http://192.168.89.39/dirental/booking_list.php"),
+        Uri.parse("http://192.168.200.236/dirental/booking_list.php"),
       );
 
       if (response.statusCode == 200) {
@@ -41,11 +41,13 @@ class _DataBookingPageState extends State<DataBookingPage> {
     }
   }
 
-  Future _onDelete() async {
+  Future _onDelete(String id) async {
     try {
-      await http
-          .post(Uri.parse("http://192.168.89.39/dirental/booking_delete.php"))
-          .then((value) {
+      await http.post(
+          Uri.parse("http://192.168.200.236/dirental/booking_delete.php"),
+          body: {
+            "id": id,
+          }).then((value) {
         var data = jsonDecode(value.body);
         print(data['message']);
         Navigator.push(
@@ -74,6 +76,7 @@ class _DataBookingPageState extends State<DataBookingPage> {
                   child: ListView.builder(
                     itemCount: _get.length,
                     itemBuilder: (context, index) {
+                      final idBooking = _get[index];
                       return GestureDetector(
                         onTap: () {
                           showDialog(
@@ -118,11 +121,7 @@ class _DataBookingPageState extends State<DataBookingPage> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          if (_onDelete() == true) {
-                                            Fluttertoast.showToast(
-                                                msg: 'Data berhasil dihapus');
-                                            Get.to(const MainPage());
-                                          }
+                                          _onDelete(idBooking.id.toString());
                                         },
                                         child: Text(
                                           "Ya",

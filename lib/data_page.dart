@@ -42,7 +42,7 @@ class _DataPageState extends State<DataPage> {
     try {
       var request = http.MultipartRequest(
         "POST",
-        Uri.parse("http://192.168.89.39/dirental/create.php"),
+        Uri.parse("http://192.168.200.236/dirental/create.php"),
       );
       request.fields['merk'] = merkController.text;
       request.fields['nopol'] = nopolController.text;

@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   Future _getData() async {
     try {
       final response = await http.get(
-        Uri.parse("http://192.168.89.39/dirental/list.php"),
+        Uri.parse("http://192.168.200.236/dirental/list.php"),
       );
 
       if (response.statusCode == 200) {
@@ -92,7 +92,6 @@ class _HomePageState extends State<HomePage> {
                               itemCount: _get.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
-                                  onLongPress: () {},
                                   onDoubleTap: () {
                                     showDialog(
                                       context: context,
@@ -487,7 +486,7 @@ class _HomePageState extends State<HomePage> {
                                               Image(
                                                 height: 70,
                                                 image: NetworkImage(
-                                                    'http://192.168.89.39/dirental/images/' +
+                                                    'http://192.168.200.236/dirental/images/' +
                                                         _get[index]['image']),
                                               ),
                                               const SizedBox(
